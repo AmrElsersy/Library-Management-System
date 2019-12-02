@@ -81,9 +81,6 @@ private:
     QLineEdit* bookState;
     QPushButton *Ok2Btn;
 
-    BookWidget *bookWidget;
-    BookWidget ss;
-
 public:
     StudentWidget(QWidget* parent = nullptr);
     void initToolBar();

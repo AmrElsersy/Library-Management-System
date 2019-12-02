@@ -45,7 +45,8 @@ private:
     QLabel* bookPublisher;QLabel* publisher;
     QLabel* bookAvailability;QLabel* availability;
     QLabel* bookImage;
-    QPushButton* backBtn,*borrowBtn;
+//    QPushButton* backBtn;
+    QPushButton*borrowBtn;
     QMessageBox* borrowed,*errorBox;
     QString Path;
     string bookNameStr;
@@ -73,7 +74,6 @@ public slots:
     void backIsClicked();
     void borrowIsClicked();
     void bookInfo(Book);
-    void displayBook(Book);
     void error(string);
     void okkkButtonClicked();
     void setCurrentBook(Book b);

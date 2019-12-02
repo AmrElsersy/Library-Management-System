@@ -21,7 +21,7 @@ BookWidget::BookWidget(QWidget *parent) : QWidget(parent)
     this->publisher = new QLabel("Publisher :");
     this->availability = new QLabel("Status :");
     this->bookImage = new QLabel();
-    this->backBtn = new QPushButton("Ok");
+//    this->backBtn = new QPushButton("Ok");
     this->borrowBtn = new QPushButton("Borrow book");
     this->borrowed = new QMessageBox();
     this->errorBox = new QMessageBox();
@@ -37,7 +37,7 @@ BookWidget::BookWidget(QWidget *parent) : QWidget(parent)
     this->grid->addWidget(this->bookPrice,2,1,1,2);
     this->grid->addWidget(this->bookPublisher,3,1,1,2);
     this->grid->addWidget(this->bookAvailability,4,1,1,2);
-    this->grid->addWidget(this->backBtn,5,0,1,2);
+//    this->grid->addWidget(this->backBtn,5,0,1,2);
     this->grid->addWidget(this->borrowBtn,5,2,1,2);
     this->grid->addWidget(this->bookImage,0,4,6,3);
 
@@ -63,7 +63,7 @@ BookWidget::BookWidget(QWidget *parent) : QWidget(parent)
 
 void BookWidget::Signals_Slots()
 {
-    connect(this->backBtn,SIGNAL(clicked()),this,SLOT(backIsClicked()));
+//    connect(this->backBtn,SIGNAL(clicked()),this,SLOT(backIsClicked()));
     connect(this->borrowBtn,SIGNAL(clicked()),this,SLOT(borrowIsClicked()));
     connect(this->OkkBtn,SIGNAL(clicked()),this,SLOT(okkkButtonClicked()));
 
@@ -71,15 +71,19 @@ void BookWidget::Signals_Slots()
 
 void BookWidget::backIsClicked()
 {
-    emit setCurrentWidget(STUDENT_WIDGET);
-    //this->hide();
+    // mlhas lazma
+//    this->hide();
 }
 
 void BookWidget::borrowIsClicked()
 {
+    if(!this->currentBook.getAvailability())
+    {
+        this->errorBox->setText("Book is Not Available");
+        this->errorBox->show();
+        return;
+    }
     ReturnWidget->show();
-//    this->borrowed->setText("You've sucessfully borrowed this book");
-//    this->borrowed->show();
 }
 
 void BookWidget::bookInfo(Book b)
@@ -95,25 +99,7 @@ void BookWidget::bookInfo(Book b)
     QPixmap image = icon.pixmap(100,100);
     bookImage->setPixmap(image);
     bookNameStr=currentBook.getName();
-    emit setCurrentWidget(BOOK_WIDGET);
-    //*********************************************this->show();
-}
-
-void BookWidget::displayBook(Book b)
-{
-    currentBook = b;
-    this->bookName->setText(QString::fromStdString(currentBook.getName()));
-    this->bookType->setText(QString::fromStdString(currentBook.getType()));
-    this->bookPrice->setText(QString::fromStdString(to_string(currentBook.getPrice())));
-    this->bookPublisher->setText(QString::fromStdString(currentBook.getPublisherName()));
-    if(currentBook.getAvailability()) this->bookAvailability->setText("Available");
-    else this->bookAvailability->setText("Not Available");
-    QIcon icon(this->Path + QString::fromStdString(currentBook.getImagePath()));
-    QPixmap image = icon.pixmap(100,100);
-    bookImage->setPixmap(image);
-    bookNameStr=currentBook.getName();
-    emit setCurrentWidget(BOOK_WIDGET);
-    //*********************************************this->show();
+    this->show();
 }
 
 
@@ -125,6 +111,21 @@ void BookWidget::error(string text)
 
 void BookWidget::okkkButtonClicked()
 {
+    // check empty search
+    if(this->ReturnDate->text().isEmpty())
+    {
+        this->errorBox->setText("Enter Return Date");
+        this->errorBox->show();
+        return;
+    }
+    // return Date must be > todayDate
+    if(this->ReturnDate->text().toInt() <= todayDate)
+    {
+        this->errorBox->setText("Invalid Return Data");
+        this->errorBox->show();
+        return;
+    }
+
     this->expectedReturnDate = this->ReturnDate->text().toInt();
     emit borrowBook(bookNameStr,"amgad",expectedReturnDate);
     this->ReturnWidget->hide();
@@ -133,5 +134,15 @@ void BookWidget::okkkButtonClicked()
 void BookWidget::setCurrentBook(Book b)
 {
     currentBook =b;
+    this->bookName->setText(QString::fromStdString(currentBook.getName()));
+    this->bookType->setText(QString::fromStdString(currentBook.getType()));
+    this->bookPrice->setText(QString::fromStdString(to_string(currentBook.getPrice())));
+    this->bookPublisher->setText(QString::fromStdString(currentBook.getPublisherName()));
+    if(currentBook.getAvailability()) this->bookAvailability->setText("Available");
+    else this->bookAvailability->setText("Not Available");
+    QIcon icon(this->Path + QString::fromStdString(currentBook.getImagePath()));
+    QPixmap image = icon.pixmap(100,100);
+    bookImage->setPixmap(image);
+    bookNameStr=currentBook.getName();
 }
 

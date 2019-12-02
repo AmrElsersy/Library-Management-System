@@ -17,13 +17,13 @@ StudentWidget::StudentWidget(QWidget *parent) : QWidget(parent)
     this->lastSize.setHeight(0);
 
     // ems7
-    QWidget* w1 = new QWidget; w1->setStyleSheet("background-color:green");
-    QWidget* w2 = new QWidget; w2->setStyleSheet("background-color:black");
-    QWidget* w3 = new QWidget; w3->setStyleSheet("background-color:white");
-    this->BooksWidgets.push_back(w1);
-    this->BooksWidgets.push_back(w2);
-    this->BooksWidgets.push_back(w3);
-    this->UpdateBooks();
+//    QWidget* w1 = new QWidget; w1->setStyleSheet("background-color:green");
+//    QWidget* w2 = new QWidget; w2->setStyleSheet("background-color:black");
+//    QWidget* w3 = new QWidget; w3->setStyleSheet("background-color:white");
+//    this->BooksWidgets.push_back(w1);
+//    this->BooksWidgets.push_back(w2);
+//    this->BooksWidgets.push_back(w3);
+//    this->UpdateBooks();
 
     //today   to be designed
     this->increaseTime = new QPushButton("Add day");
@@ -32,7 +32,6 @@ StudentWidget::StudentWidget(QWidget *parent) : QWidget(parent)
     this->today->setText(QString::fromStdString(to_string(todayDate)));
 
     this->errorBox = new QMessageBox();
-
     this->tabWidget = new QTabWidget();
 
     this->initProfileWidget();
@@ -77,7 +76,6 @@ void StudentWidget::initToolBar()
                                  );
 
 }
-
 void StudentWidget::initProfileWidget()
 {
     this->ProfileWidget = new QWidget();
@@ -249,7 +247,7 @@ void StudentWidget::Signals_Slots()
     connect(this->PriceBtn,SIGNAL(clicked()),this,SLOT(priceButtonClicked()));
     connect(this->PubBtn,SIGNAL(clicked()),this,SLOT(pubButtonClicked()));
     connect(this->DoneBtn,SIGNAL(clicked()),this,SLOT(doneButtonClicked()));
-    connect(this->Ok2Btn,SIGNAL(clicked()),this,SLOT(Ok2ButtonClicked()));
+//    connect(this->Ok2Btn,SIGNAL(clicked()),this,SLOT(Ok2ButtonClicked()));
 
 }
 
@@ -278,9 +276,7 @@ void StudentWidget::ButtonClicked(QAction *action)
     if (action->text() == "Profile")
         this->ProfileWidget->show();
     else if (action->text() == "Borrow")
-        emit getBookInfo(searchLineEdit->text().toStdString());   //**********************************
-      //  this->bookWidget= new BookWidget(b);
-    //this->bookWidget->show();
+        emit getBookInfo(searchLineEdit->text().toStdString());
     else if (action->text() == "Return")
         this->ReturnWidget->show();
     else if (action->text() == "Expected")
@@ -405,24 +401,51 @@ void StudentWidget::okButtonhClicked()
 
 void StudentWidget::nameButtonClicked()
 {
+    if(SearchBook->text().isEmpty())
+    {
+        this->errorBox->setText("Empty Search");
+        this->errorBox->show();
+        return;
+    }
     this->tabWidget->clear();
     emit searchBookByName(this->SearchBook->text().toStdString(),currentStudent.getName());
 }
 
 void StudentWidget::typeButtonClicked()
 {
+    if(SearchBook->text().isEmpty())
+    {
+        this->errorBox->setText("Empty Search");
+        this->errorBox->show();
+        return;
+    }
+
     this->tabWidget->clear();
     emit searchBookByType(this->SearchBook->text().toStdString(),currentStudent.getName());
 }
 
 void StudentWidget::priceButtonClicked()
 {
+    if(SearchBook->text().isEmpty())
+    {
+        this->errorBox->setText("Empty Search");
+        this->errorBox->show();
+        return;
+    }
+
     this->tabWidget->clear();
-    emit searchBookByPrice(stoi(this->SearchBook->text().toStdString()),currentStudent.getName());
+    emit searchBookByPrice(this->SearchBook->text().toInt(),currentStudent.getName());
 }
 
 void StudentWidget::pubButtonClicked()
 {
+    if(SearchBook->text().isEmpty())
+    {
+        this->errorBox->setText("Empty Search");
+        this->errorBox->show();
+        return;
+    }
+
     this->tabWidget->clear();
     emit searchBookByPub(this->SearchBook->text().toStdString(),currentStudent.getName());
 }
@@ -435,11 +458,18 @@ void StudentWidget::doneButtonClicked()
 void StudentWidget::booksFound(vector<Book> v)
 {
     if(v.size()==0)
-        this->tabWidget->addTab(new QLabel("No Book matches your search"),QString::fromStdString("xxx"));
+    {
+        this->errorBox->setText("Not Found");
+        this->errorBox->show();
+        return;
+    }
 
-    for(int i=0;i<v.size();i++)
-        this->tabWidget->addTab(new BookWidget(/*v[i]*/),QString::fromStdString(v[i].getName()));
-
+    for(uint i=0;i<v.size();i++)
+    {
+        BookWidget* foundBookWidget  = new BookWidget;
+        foundBookWidget->setCurrentBook(v[i]);
+        this->tabWidget->addTab(foundBookWidget,QString::fromStdString(v[i].getName()));
+    }
     this->tabWidget->show();
 }
 

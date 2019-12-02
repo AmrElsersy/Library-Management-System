@@ -185,9 +185,12 @@ void Controller::Upload_book(string pubName ,string name ,string type,int price)
 void Controller::searchBookByName(string BookNameOrID,string stuName)
 {
     //Book b = db.loadBookByRowId(BookNameOrID);
-    Book b = db.loadBook(BookNameOrID);
+    Book b = db.loadBookForce(BookNameOrID);
     if(b.getName().empty())
-        b = db.loadBookForce(BookNameOrID);    
+    {
+        emit error_noBook("Not Found Book");
+        return;
+    }
     emit bookInfo(b);
     Student s =db.loadStudent(stuName);
     db.addSearchHistory(b,stuName);
@@ -197,13 +200,14 @@ void Controller::searchBookByName(string BookNameOrID,string stuName)
 void Controller::searchBookByType(string type , string stuName)
 {
     vector<Book> v = db.searchBookByType(type);
-    emit booksFound(v);
     Student s =db.loadStudent(stuName);
     for(int i=0;i<v.size();i++)
     {
         db.addSearchHistory(v[i],stuName);
         db.updateStudent(s,stuName);
     }
+
+    emit booksFound(v);
 }
 
 void Controller::searchBookByPrice(int price, string stuName)
@@ -327,9 +331,12 @@ void Controller::aa(string stuName)
 void Controller::getBookInfo(string BookNameOrID)
 {
     //Book b = db.loadBookByRowId(BookNameOrID);
-    Book b = db.loadBook(BookNameOrID);
+    Book b = db.loadBookForce(BookNameOrID);
     if(b.getName().empty())
-        b = db.loadBookForce(BookNameOrID);
+    {
+        emit error_noBook("Not Found Book");
+        return;
+    }
     emit bookInfo(b);
 }
 

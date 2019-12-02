@@ -26,7 +26,7 @@ void MainWindow::Design()
     this->stackWidget->addWidget(this->logInWidget);
     this->stackWidget->addWidget(this->publisherWidget);
     this->stackWidget->addWidget(this->studentWidget);
-    this->stackWidget->addWidget(this->bookWidget);
+//    this->stackWidget->addWidget(this->bookWidget);
 }
 
 void MainWindow::Signals_Slots()
@@ -50,7 +50,6 @@ void MainWindow::Signals_Slots()
     connect(this->publisherWidget,SIGNAL(updatePublisher(string,string,string,string,int)),this->controller,SLOT(updatePublisher(string ,string,string,string,int)));
 
     // Books
-    connect(this->studentWidget,SIGNAL(searchBookByName(string,string)),this->controller,SLOT(searchBookByName(string,string)));
     connect(this->controller,SIGNAL(bookInfo(Book)),this->bookWidget,SLOT(bookInfo(Book)));
     connect(this->bookWidget,SIGNAL(setCurrentWidget(int)),this,SLOT(changeCurrentWidget(int)));
     connect(this->bookWidget,SIGNAL(borrowBook(string,string,int)),this->controller,SLOT(borrowBook(string,string,int)));
@@ -74,8 +73,6 @@ void MainWindow::Signals_Slots()
     //librarian
     //connect(this->librarian,SIGNAL(librarianWidgetOpen()),this->studentWidget,SLOT(librarianWidgetOpen()));
     //connect(this->studentWidget,SIGNAL(libBookState(int)),this->librarian,SLOT(libBookState(int)));
-
-
 
 }
 
