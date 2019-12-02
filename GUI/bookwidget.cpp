@@ -127,7 +127,7 @@ void BookWidget::okkkButtonClicked()
     }
 
     this->expectedReturnDate = this->ReturnDate->text().toInt();
-    emit borrowBook(bookNameStr,"amgad",expectedReturnDate);
+    emit borrowBook(this->bookNameStr,this->userName ,this->expectedReturnDate);
     this->ReturnWidget->hide();
 }
 
@@ -144,5 +144,11 @@ void BookWidget::setCurrentBook(Book b)
     QPixmap image = icon.pixmap(100,100);
     bookImage->setPixmap(image);
     bookNameStr=currentBook.getName();
+
+}
+
+void BookWidget::setLoggedInUserName(string name)
+{
+    this->userName = name;
 }
 

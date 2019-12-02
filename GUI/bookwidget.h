@@ -57,6 +57,7 @@ private:
     QLineEdit* ReturnDate;
     QPushButton *OkkBtn;
 
+    string userName ;
     Book currentBook;
 
 public:
@@ -77,7 +78,7 @@ public slots:
     void error(string);
     void okkkButtonClicked();
     void setCurrentBook(Book b);
-
+    void setLoggedInUserName(string name);
 
 };
 

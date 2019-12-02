@@ -185,7 +185,13 @@ void Controller::Upload_book(string pubName ,string name ,string type,int price)
 void Controller::searchBookByName(string BookNameOrID,string stuName)
 {
     //Book b = db.loadBookByRowId(BookNameOrID);
-    Book b = db.loadBookForce(BookNameOrID);
+
+    Book b;
+    // check for available books
+    b= db.loadBook(BookNameOrID);
+    // if not found -> get any un available book to just show it to user and know that there is no available books
+    if(b.getName().empty())
+        b= db.loadBookForce(BookNameOrID);
     if(b.getName().empty())
     {
         emit error_noBook("Not Found Book");
@@ -242,24 +248,24 @@ void Controller::borrowBook(string bookName,string stuName,int expectedReturnDat
         return;
     }
     else {
-    int borrowDate=todayDate;
-    Student s = db.loadStudent(stuName);
-    Book b = db.loadBook(bookName);
-    s.setCurrentBook(db.loadBook(bookName).getRowId());
-    b.setBorrowedDate(borrowDate);
-    b.setExpectedReturnDate(expectedReturnDate);
-    db.addCurrentBooks(b,stuName);
-    db.addBorrowedBooks(b,stuName);
-    b.setAvailability(0);
-    //db.updateStudent(s,stuName);
-    db.updateBookByRowId(b,db.loadBook(bookName).getRowId());
-    Publisher pub = db.loadPublisher(b.getPublisherName());
-    pub.addCash(b.getPrice()/2);
-    db.updatePublisher(pub,pub.getName());
-    cout<<"You borrowed the book successfully, your book's ID is : "<<b.getRowId()<<endl;
-    cout<<"You will pay : "<<ceil((expectedReturnDate-borrowDate)/7.0)*b.getPrice()<<endl;
-    cout<<"Warning 1 : if you return the book late, you'll pay a fee of 5$ for each week late"<<endl;
-    cout<<"Warning 2 : if you return the book damaged, you'll pay a fee of half the book's price"<<endl;
+        int borrowDate=todayDate;
+        Student s = db.loadStudent(stuName);
+        Book b = db.loadBook(bookName);
+        s.setCurrentBook(db.loadBook(bookName).getRowId());
+        b.setBorrowedDate(borrowDate);
+        b.setExpectedReturnDate(expectedReturnDate);
+        db.addCurrentBooks(b,stuName);
+        db.addBorrowedBooks(b,stuName);
+        b.setAvailability(0);
+        //db.updateStudent(s,stuName);
+        db.updateBookByRowId(b,db.loadBook(bookName).getRowId());
+        Publisher pub = db.loadPublisher(b.getPublisherName());
+        pub.addCash(b.getPrice()/2);
+        db.updatePublisher(pub,pub.getName());
+        cout<<"You borrowed the book successfully, your book's ID is : "<<b.getRowId()<<endl;
+        cout<<"You will pay : "<<ceil((expectedReturnDate-borrowDate)/7.0)*b.getPrice()<<endl;
+        cout<<"Warning 1 : if you return the book late, you'll pay a fee of 5$ for each week late"<<endl;
+        cout<<"Warning 2 : if you return the book damaged, you'll pay a fee of half the book's price"<<endl;
     }}
 
 void Controller::returnBook(string bookName, string stuName)
@@ -331,7 +337,10 @@ void Controller::aa(string stuName)
 void Controller::getBookInfo(string BookNameOrID)
 {
     //Book b = db.loadBookByRowId(BookNameOrID);
-    Book b = db.loadBookForce(BookNameOrID);
+    Book b;
+    b= db.loadBook(BookNameOrID);
+    if(b.getName().empty())
+        b= db.loadBookForce(BookNameOrID);
     if(b.getName().empty())
     {
         emit error_noBook("Not Found Book");

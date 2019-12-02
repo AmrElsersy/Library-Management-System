@@ -16,7 +16,7 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow(parent)
     this->Signals_Slots();
 
     this->setCentralWidget(this->stackWidget);
-    this->stackWidget->setCurrentIndex(0);
+    this->stackWidget->setCurrentIndex(START_WIDGET);
 }
 
 void MainWindow::Design()
@@ -26,7 +26,6 @@ void MainWindow::Design()
     this->stackWidget->addWidget(this->logInWidget);
     this->stackWidget->addWidget(this->publisherWidget);
     this->stackWidget->addWidget(this->studentWidget);
-//    this->stackWidget->addWidget(this->bookWidget);
 }
 
 void MainWindow::Signals_Slots()
@@ -69,7 +68,7 @@ void MainWindow::Signals_Slots()
     connect(this->studentWidget,SIGNAL(getSearchHistory(string)),this->controller,SLOT(getSearchHistory(string)));
     connect(this->controller,SIGNAL(searchedBooks(vector<string>)),this->studentWidget,SLOT(searchedBooks(vector<string>)));
     connect(this->studentWidget,SIGNAL(setCurrentWidget(int)),this,SLOT(changeCurrentWidget(int)));
-
+    connect(this->studentWidget,SIGNAL(setLoggedInUserName(string)),this->bookWidget,SLOT(setLoggedInUserName(string)));
     //librarian
     //connect(this->librarian,SIGNAL(librarianWidgetOpen()),this->studentWidget,SLOT(librarianWidgetOpen()));
     //connect(this->studentWidget,SIGNAL(libBookState(int)),this->librarian,SLOT(libBookState(int)));

@@ -54,8 +54,8 @@ void StudentWidget::initToolBar()
 
     QIcon Profile(this->Path + "/../../Library-Management-System/icons/profile.png"); QString ProfileText = "Profile";
     QIcon Search(this->Path + "/../../Library-Management-System/icons/search.png"); QString SearchText = "Search";
-    QIcon favorite(this->Path + "/../../Library-Management-System/icons/favorite1.png"); QString favoriteText = "Expected";
-    QIcon Borrowed(this->Path + "/../../Library-Management-System/icons/book1.png"); QString BorrowedText = "Borrow";
+    QIcon favorite(this->Path + "/../../Library-Management-System/icons/book.png"); QString favoriteText = "My Books";
+//    QIcon Borrowed(this->Path + "/../../Library-Management-System/icons/book1.png"); QString BorrowedText = "Borrow";
     QIcon History(this->Path + "/../../Library-Management-System/icons/history.png"); QString HistoryText = "History";
     QIcon Return(this->Path + "/../../Library-Management-System/icons/return.png"); QString ReturnText = "Return";
     QIcon LogOut(this->Path + "/../../Library-Management-System/icons/logout.png"); QString LogOutText = "Log Out";
@@ -63,7 +63,7 @@ void StudentWidget::initToolBar()
     this->toolBar->addAction(Profile,ProfileText);
     this->toolBar->addAction(Search,SearchText);
     this->toolBar->addAction(favorite,favoriteText);
-    this->toolBar->addAction(Borrowed,BorrowedText);
+//    this->toolBar->addAction(Borrowed,BorrowedText);
     this->toolBar->addAction(History,HistoryText);
     this->toolBar->addAction(Return,ReturnText);
     this->toolBar->addAction(LogOut,LogOutText);
@@ -192,7 +192,6 @@ void StudentWidget::initHistoryWidget()
     verticlaLayout->addWidget(this->OkBtnh);
     this->HistoryWidget->setLayout(verticlaLayout);
 }
-
 void StudentWidget::initLibrarianWidget()
 {
     this->librarianWidget = new QWidget();
@@ -266,6 +265,7 @@ void StudentWidget::UpdateBooks()
 void StudentWidget::studentLoggedIn(Student student)
 {
     this->currentStudent = student;
+    emit setLoggedInUserName(this->currentStudent.getName());
     this->nameEdit->setText(QString::fromStdString(this->currentStudent.getName()));
     this->passEdit->setText(QString::fromStdString(this->currentStudent.getPassword()));
     this->emailEdit->setText(QString::fromStdString(this->currentStudent.getEmail()));
@@ -275,11 +275,11 @@ void StudentWidget::ButtonClicked(QAction *action)
 {
     if (action->text() == "Profile")
         this->ProfileWidget->show();
-    else if (action->text() == "Borrow")
-        emit getBookInfo(searchLineEdit->text().toStdString());
+//    else if (action->text() == "Borrow")
+//        emit getBookInfo(searchLineEdit->text().toStdString());
     else if (action->text() == "Return")
         this->ReturnWidget->show();
-    else if (action->text() == "Expected")
+    else if (action->text() == "My Books")
         emit aa(currentStudent.getName());
     else if (action->text() == "Search")
         this->SearchWidget->show();
@@ -318,6 +318,8 @@ void StudentWidget::okButtonClicked()
     this->emailEdit->setReadOnly(true);
     this->cashEdit->setReadOnly(true);
     this->ProfileWidget->hide();
+    emit setLoggedInUserName(this->currentStudent.getName());
+
 
 }
 

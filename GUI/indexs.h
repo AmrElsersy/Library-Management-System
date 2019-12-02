@@ -8,7 +8,6 @@
 #define LOGIN_WIDGET 2
 #define PUBLISHER_WIDGET 3
 #define STUDENT_WIDGET 4
-#define BOOK_WIDGET 5
 
 
 #endif // INDEXS_H

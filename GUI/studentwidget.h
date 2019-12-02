@@ -106,6 +106,7 @@ signals:
     void searchBookByPub(string,string);
     void getSearchHistory(string);
     void setCurrentWidget(int);
+    void setLoggedInUserName(string);
 //    void libBookState(int);
 
 public slots:
