@@ -57,6 +57,8 @@ public:
     vector<Book> searchBookByPrice(int);
     vector<Book> searchBookByPubName(string);
 
+    map<string,string> getAllBooks();
+
     //    void saveLibrarian(Librarian);
     //    Book loadLibirian();
 };

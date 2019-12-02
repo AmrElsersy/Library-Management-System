@@ -69,7 +69,11 @@ void MainWindow::Signals_Slots()
     connect(this->controller,SIGNAL(searchedBooks(vector<string>)),this->studentWidget,SLOT(searchedBooks(vector<string>)));
     connect(this->studentWidget,SIGNAL(setCurrentWidget(int)),this,SLOT(changeCurrentWidget(int)));
     connect(this->studentWidget,SIGNAL(setLoggedInUserName(string)),this->bookWidget,SLOT(setLoggedInUserName(string)));
+
+    connect(this->studentWidget,SIGNAL(getAllBooks()),this->controller,SLOT(getAllBooks()));
+
     //librarian
+
     //connect(this->librarian,SIGNAL(librarianWidgetOpen()),this->studentWidget,SLOT(librarianWidgetOpen()));
     //connect(this->studentWidget,SIGNAL(libBookState(int)),this->librarian,SLOT(libBookState(int)));
 

@@ -16,6 +16,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     GUI/bookwidget.cpp \
+    GUI/imagewidget.cpp \
     GUI/loginwidget.cpp \
     GUI/mainwindow.cpp \
     GUI/publisherwidget.cpp \
@@ -34,6 +35,7 @@ SOURCES += \
 HEADERS += \
     GUI/bookwidget.h \
     GUI/header.h \
+    GUI/imagewidget.h \
     GUI/indexs.h \
     GUI/loginwidget.h \
     GUI/mainwindow.h \

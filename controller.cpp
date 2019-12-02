@@ -357,6 +357,11 @@ void Controller::getSearchHistory(string stuName)
     emit searchedBooks(v);
 }
 
+map<string, string> Controller::getAllBooks()
+{
+    return this->db.getAllBooks();
+}
+
 void Controller::updatePublisher(string pubName, string name, string pass, string email, int cashAmount)
 {
     Publisher p;

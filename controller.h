@@ -48,6 +48,7 @@ public slots:
     void aa(string);
     void getBookInfo(string);
     void getSearchHistory(string);
+    map<string,string> getAllBooks();
 
 
 signals:

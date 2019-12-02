@@ -27,6 +27,9 @@
 #include <QTabWidget>
 #include <cstdlib>
 #include <iostream>
+#include "GUI/imagewidget.h"
+#include <vector>
+using namespace std;
 
 class StudentWidget : public QWidget
 {
@@ -38,6 +41,11 @@ private:
     QWidget* viewBooksWidget;
     QScrollArea* viewBooksScroll;
     QGridLayout* viewBooksLayout;
+    std::vector<imageWidget*> books;
+    uint row ;
+    uint colomn;
+
+
 
     QWidget* ProfileWidget;
     QGridLayout* ProfileLayout;
@@ -107,6 +115,7 @@ signals:
     void getSearchHistory(string);
     void setCurrentWidget(int);
     void setLoggedInUserName(string);
+    map<string, string> getAllBooks();
 //    void libBookState(int);
 
 public slots:
@@ -129,6 +138,7 @@ public slots:
     void doneButtonClicked();
     void booksFound(vector<Book>);
     void searchedBooks(vector<string>);
+    void bookClicked(string name);
 //    void librarianWidgetOpen();
 //    void Ok2ButtonClicked();
 

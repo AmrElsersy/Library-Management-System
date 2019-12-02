@@ -6,7 +6,6 @@ Book b;
 StudentWidget::StudentWidget(QWidget *parent) : QWidget(parent)
 {b.setPrice(10);
     this->Path = QCoreApplication::applicationDirPath();
-    //this->bookWidget= new BookWidget();
     this->grid = new QGridLayout();
     this->toolBar = new QToolBar();
     this->searchLineEdit = new QLineEdit();
@@ -15,15 +14,6 @@ StudentWidget::StudentWidget(QWidget *parent) : QWidget(parent)
     this->viewBooksLayout = new QGridLayout();
     this->lastSize.setWidth(0);
     this->lastSize.setHeight(0);
-
-    // ems7
-//    QWidget* w1 = new QWidget; w1->setStyleSheet("background-color:green");
-//    QWidget* w2 = new QWidget; w2->setStyleSheet("background-color:black");
-//    QWidget* w3 = new QWidget; w3->setStyleSheet("background-color:white");
-//    this->BooksWidgets.push_back(w1);
-//    this->BooksWidgets.push_back(w2);
-//    this->BooksWidgets.push_back(w3);
-//    this->UpdateBooks();
 
     //today   to be designed
     this->increaseTime = new QPushButton("Add day");
@@ -215,8 +205,8 @@ void StudentWidget::Design()
     this->viewBooksScroll->setWidget(this->viewBooksWidget);
     this->viewBooksScroll->setWidgetResizable(true);
     this->viewBooksScroll->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
-    this->viewBooksScroll->setStyleSheet("background-color:red");
-    this->viewBooksScroll->setLayout(this->viewBooksLayout);
+
+    this->viewBooksWidget->setLayout(this->viewBooksLayout);
 
     // grid Design
     this->grid->addWidget(this->toolBar,0,0,-1,1);
@@ -252,14 +242,38 @@ void StudentWidget::Signals_Slots()
 
 void StudentWidget::UpdateBooks()
 {
-    // clear the screen w ebtdy 3la ndafa
-//    for(uint i =0; i < BooksWidgets.size() ; i++)
-//        this->viewBooksLayout->removeWidget(this->BooksWidgets[i]);
-
-    for (int i =0 ;i < this->BooksWidgets.size() ;i++)
+    // get allBooks from dataBase -> no duplicates
+    map<string, string> name_imagePath = emit getAllBooks();
+    // convert them into imageWidget (book interface)
+    for (auto i = name_imagePath.begin(); i != name_imagePath.end() ;i++)
     {
-        this->viewBooksLayout->addWidget(BooksWidgets[i]);
+        imageWidget* book_interface = new imageWidget(i->first,i->second);
+        connect(book_interface,SIGNAL(bookClicked(string)),this,SLOT(bookClicked(string)));
+        books.push_back(book_interface);
+        cout << i->first << ",";
     }
+    cout << "  =========== books" << endl;
+    // display it in the gridlayout
+    uint COLOMN_SIZE = 3;
+    uint ROW_SIZE = books.size()/COLOMN_SIZE +1;
+
+    cout << ROW_SIZE << "," << COLOMN_SIZE << endl;
+    for (uint i =0 ; i< ROW_SIZE ; i++)
+    {
+        for(uint j =0 ; j< COLOMN_SIZE; j++)
+        {
+            uint index =  i * COLOMN_SIZE + j ;
+            if(index >= books.size())
+                break;
+            cout << "i=" << i << ",j=" << j << ",index=" << index << endl;
+            // for sizing apperance
+            books[index]->setMaximumWidth(this->viewBooksWidget->width()/3);
+            books[index]->setMaximumHeight(this->viewBooksWidget->height()/3);
+
+            this->viewBooksLayout->addWidget(books[index],i,j);
+        }
+    }
+
 }
 
 void StudentWidget::studentLoggedIn(Student student)
@@ -270,13 +284,12 @@ void StudentWidget::studentLoggedIn(Student student)
     this->passEdit->setText(QString::fromStdString(this->currentStudent.getPassword()));
     this->emailEdit->setText(QString::fromStdString(this->currentStudent.getEmail()));
     this->cashEdit->setText(QString::fromStdString(to_string(this->currentStudent.getCash())));
+    this->UpdateBooks();
 }
 void StudentWidget::ButtonClicked(QAction *action)
 {
     if (action->text() == "Profile")
         this->ProfileWidget->show();
-//    else if (action->text() == "Borrow")
-//        emit getBookInfo(searchLineEdit->text().toStdString());
     else if (action->text() == "Return")
         this->ReturnWidget->show();
     else if (action->text() == "My Books")
@@ -286,8 +299,12 @@ void StudentWidget::ButtonClicked(QAction *action)
     else if (action->text() == "History")
         emit getSearchHistory(currentStudent.getName());
     else if (action->text() == "Log Out")
+    {
         emit setCurrentWidget(LOGIN_WIDGET);
-
+        for (int i =0 ; i< this->books.size();i++)
+            delete this->books[i];
+        this->books.clear();
+    }
 }
 
 void StudentWidget::editButtonClicked()
@@ -387,6 +404,11 @@ void StudentWidget::searchedBooks(vector<string> v)
        this->addRoot(v[i]);
 
     this->HistoryWidget->show();
+}
+
+void StudentWidget::bookClicked(string name)
+{
+    emit getBookInfo(name);
 }
 
 void StudentWidget::ok1ButtonClicked()

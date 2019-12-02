@@ -460,6 +460,22 @@ vector<Book> DataBase::searchBookByPubName(string pubName)
     return v;
 }
 
+map<string,string> DataBase::getAllBooks()
+{
+    QSqlQuery query(this->db);
+    query.prepare("SELECT Name,imagePath FROM Books;");
+    query.exec();
+    map<string,string> name_imagePath ;
+    while(query.next())
+    {
+        string name  = query.value(0).toString().toStdString() ;
+        string imagePath = query.value(1).toString().toStdString();
+        name_imagePath[name] = imagePath;
+    }
+    return name_imagePath;
+
+}
+
 
 vector<string> DataBase :: split_string(string s,string splitter)
 {
