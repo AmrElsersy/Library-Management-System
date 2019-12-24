@@ -4,12 +4,22 @@ SignUp::SignUp(QWidget* parent): QWidget(parent)
 {
     this->grid = new QGridLayout;
     this->SignUpBtn = new QPushButton("Sign Up");
+    this->SignUpBtn->setStyleSheet("background: #2e2e2e; border-radius: 10px; padding: 10px 0px; color: white; ");
+    this->SignUpBtn->setCursor(Qt::PointingHandCursor);
     this->BackBtn = new QPushButton("Back");
-
+    this->BackBtn->setStyleSheet("background: #2e2e2e; border-radius: 10px; padding: 10px 0px; color: white; ");
+    this->BackBtn->setCursor(Qt::PointingHandCursor);
     this->Name = new QLineEdit;
+    this->Name->setStyleSheet("background: white;");
+
     this->Email = new QLineEdit;
+    this->Email->setStyleSheet("background: white;");
+
     this->Password = new QLineEdit;
+    this->Password->setStyleSheet("background: white;");
+
     this->ConfirmPassword = new QLineEdit;
+    this->ConfirmPassword->setStyleSheet("background: white;");
 
     this->nameLabel = new QLabel("Name");
     this->emailLabel= new QLabel("Email");

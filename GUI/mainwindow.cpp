@@ -3,10 +3,12 @@
 MainWindow::MainWindow(QWidget *parent): QMainWindow(parent)
 {
     this->stackWidget =new QStackedWidget();
+    this->stackWidget->setStyleSheet("background-color: #F6F5E4; color: #2E2E2E; font-size: 15px; font-weight: 400;");
     this->controller = new Controller();
     this->librarian = new Librarian();
     this->studentWidget = new StudentWidget();
     this->startWidget = new StartWidget();
+    this->startWidget->setStyleSheet("background: transparent");
     this->signUpWidget = new SignUp();
     this->logInWidget = new LogInWidget();
     this->publisherWidget = new PublisherWidget();

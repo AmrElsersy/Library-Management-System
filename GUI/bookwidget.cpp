@@ -8,6 +8,7 @@ BookWidget::BookWidget(Book b)
 
 BookWidget::BookWidget(QWidget *parent) : QWidget(parent)
 {
+    this->setStyleSheet("background: #F6F5E4;color: #2E2E2E; font-size: 15px; font-weight: 400;");
     this->Path = QCoreApplication::applicationDirPath();
     this->grid = new QGridLayout();
     this->bookName = new QLabel();
@@ -23,6 +24,8 @@ BookWidget::BookWidget(QWidget *parent) : QWidget(parent)
     this->bookImage = new QLabel();
 //    this->backBtn = new QPushButton("Ok");
     this->borrowBtn = new QPushButton("Borrow book");
+    this->borrowBtn->setStyleSheet("background: #2e2e2e; border-radius: 10px; padding: 10px 0px; color: white; width: 150px;");
+    this->borrowBtn->setCursor(Qt::PointingHandCursor);
     this->borrowed = new QMessageBox();
     this->errorBox = new QMessageBox();
     this->errorBox->setWindowIcon(QIcon(QCoreApplication::applicationDirPath()+"/../../Library-Management-System/icons/error.png"));
@@ -44,10 +47,13 @@ BookWidget::BookWidget(QWidget *parent) : QWidget(parent)
     this->setLayout(this->grid);
 
     this->ReturnWidget = new QWidget();
+    this->ReturnWidget->setStyleSheet("background: #F6F5E4;color: #2E2E2E; font-size: 15px; font-weight: 400;");
     this->ReturnLayout = new QGridLayout();
     QLabel* enterBook = new QLabel("Enter expected return date :");
     this->ReturnDate = new QLineEdit();
     this->OkkBtn = new QPushButton("Ok");
+    this->OkkBtn->setStyleSheet("background: #2e2e2e; border-radius: 10px; padding: 10px 0px; color: white; ");
+    this->OkkBtn->setCursor(Qt::PointingHandCursor);
     this->ReturnLayout->addWidget(enterBook,0,0,Qt::AlignLeft);
     this->ReturnLayout->addWidget(ReturnDate,0,1);
     QHBoxLayout* verticlaLayout = new QHBoxLayout;

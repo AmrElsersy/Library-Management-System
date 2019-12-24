@@ -21,19 +21,20 @@ StartWidget::StartWidget(QWidget *parent) : QLabel(parent)
 void StartWidget::initButtons()
 {
     this->toolBar =new QToolBar("");
+    this->toolBar->setCursor(Qt::PointingHandCursor);
     this->loginBtn= QIcon(QCoreApplication::applicationDirPath()+"/../../Library-Management-System/icons/login6.png");
-    this->signupBtn = QIcon (QCoreApplication::applicationDirPath()+"/../../Library-Management-System/icons/signup.png");
+    this->signupBtn = QIcon (QCoreApplication::applicationDirPath()+"/../../Library-Management-System/icons/signup.png");    
     this->loginString  = "Login";
-    this->signupString = "SignUp";
+    this->signupString = "Sign Up";
     this->toolBar->addAction(this->loginBtn,this->loginString);
     this->toolBar->addAction(this->signupBtn,this->signupString);
     this->toolBar->setIconSize(QSize(200,200));
     this->toolBar->setOrientation(Qt::Horizontal);
     this->toolBar->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
-    this->toolBar->setStyleSheet("QToolButton:hover{background-color:white; color: black;}"
-                                 "QToolButton:select{background-color:white; color: black;}"
-                                 "QToolButton{color:white; font-weight: 400;"
-                                 " padding-right: 15px; padding-left: 15px; border-radius: 50;}");
+    this->toolBar->setStyleSheet("QToolButton:hover{padding: 15px;}"
+                                 "QToolButton:select{padding: 15px;}"
+                                 "QToolButton{color:white; font-weight: bold; margin:10px;"
+                                 " padding: 30px; border-radius: 50; font-size: 30px;}");
 }
 
 void StartWidget::Signals_Slots()

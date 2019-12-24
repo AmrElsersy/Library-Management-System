@@ -4,10 +4,17 @@ LogInWidget::LogInWidget(QWidget* parent): QWidget(parent)
 {
     this->grid = new QGridLayout;
     this->LogInBtn = new QPushButton("Log In");
+    this->LogInBtn->setStyleSheet("background: #2e2e2e; border-radius: 10px; padding: 10px 0px; color: white; ");
+    this->LogInBtn->setCursor(Qt::PointingHandCursor);
+
     this->BackBtn = new QPushButton("Back");
+    this->BackBtn->setStyleSheet("background: #2e2e2e; border-radius: 10px; padding: 10px 0px; color: white; ");
+    this->BackBtn->setCursor(Qt::PointingHandCursor);
 
     this->Name = new QLineEdit;
+    this->Name->setStyleSheet("background: white;");
     this->Password = new QLineEdit;
+    this->Password->setStyleSheet("background: white;");
 
     this->nameLabel = new QLabel("Name");
     this->passLabel = new QLabel("Password");
