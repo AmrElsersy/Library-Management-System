@@ -7,7 +7,6 @@ StartWidget::StartWidget(QWidget *parent) : QLabel(parent)
     this->setPixmap(pixMap->scaled(this->width(),this->height(),Qt::KeepAspectRatio) );
     this->setScaledContents(true);
 
-
     this->initButtons();
 
     this->grid->addWidget(this->toolBar,0,0,Qt::AlignCenter);

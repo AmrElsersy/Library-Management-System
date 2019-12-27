@@ -2,8 +2,14 @@
 
 MainWindow::MainWindow(QWidget *parent): QMainWindow(parent)
 {
+    QWidget* w = new QWidget;
+    w->setStyleSheet("background: qlineargradient( x1:0 y1:0, x2:1 y2:0, stop:0 #2F4F4F, stop:1 grey);");
+//    w->show();
+
     this->stackWidget =new QStackedWidget();
-    this->stackWidget->setStyleSheet("background-color: #F6F5E4; color: #2E2E2E; font-size: 15px; font-weight: 400;");
+//    this->stackWidget->setStyleSheet("background-color: #F6F5E4; color: #2E2E2E; font-size: 15px; font-weight: 400;");
+    this->stackWidget->setStyleSheet("background: qlineargradient( x1:0 y1:0, x2:1 y2:0, stop:0 #00BFFF, stop:1 #F0F8FF);"
+                                     "color: #2E2E2E; font-size: 15px; font-weight: 400;");
     this->controller = new Controller();
     this->librarian = new Librarian();
     this->studentWidget = new StudentWidget();

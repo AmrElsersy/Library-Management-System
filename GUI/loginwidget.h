@@ -1,5 +1,6 @@
 #ifndef LOGINWIDGET_H
 #define LOGINWIDGET_H
+
 #include <QObject>
 #include <QWidget>
 #include <QLineEdit>
@@ -22,10 +23,16 @@ class LogInWidget : public QWidget
 {
     Q_OBJECT
 private:
+    QGridLayout* main_grid;
+
+    QWidget* widget;
     QGridLayout* grid;
+
+    QLabel* image;
+    QPixmap* pixMap;
+
     QPushButton* LogInBtn;
     QPushButton* BackBtn;
-
     QLineEdit* Name;            QLabel* nameLabel;
     QLineEdit* Password;        QLabel* passLabel;
 
@@ -37,6 +44,7 @@ private:
 public:
     LogInWidget(QWidget* parent = nullptr);
     void Design();
+    void outDesign();
     void Signals_Slots();
 
 signals:
