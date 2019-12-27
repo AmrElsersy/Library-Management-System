@@ -23,6 +23,13 @@ class SignUp : public QWidget
 {
     Q_OBJECT
 private:
+    QGridLayout* main_grid;
+
+    QWidget* widget;
+
+    QLabel* image;
+    QPixmap* pixMap;
+
     QGridLayout* grid;
     QPushButton* SignUpBtn;
     QPushButton* BackBtn;
@@ -40,6 +47,7 @@ private:
 public:
     SignUp(QWidget* parent = nullptr);
     void Design();
+    void outDesign();
     void Signals_Slots();
 
 signals:

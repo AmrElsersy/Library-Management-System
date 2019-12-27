@@ -24,8 +24,8 @@ LogInWidget::LogInWidget(QWidget* parent): QWidget(parent)
     this->Password = new QLineEdit;
     this->Password->setStyleSheet("background: white;padding-right:50px;");
 
-    this->nameLabel = new QLabel("Name");
-    this->passLabel = new QLabel("Password");
+    this->nameLabel = new QLabel("Name");   this->nameLabel->setStyleSheet("color:#00BFFF;");
+    this->passLabel = new QLabel("Password"); this->passLabel->setStyleSheet("color:#00BFFF;");
 
     this->publisherBtn = new QRadioButton("Publisher");
     this->studentBtn = new QRadioButton("Student");
