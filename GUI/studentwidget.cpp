@@ -77,10 +77,10 @@ void StudentWidget::initProfileWidget()
     this->ProfileWidget->setStyleSheet("background: white;color: #2E2E2E; font-size: 15px; font-weight: 400;");
     this->ProfileLayout = new QGridLayout();
 
-    QLabel* name = new QLabel("Name:");             this->nameEdit = new QLineEdit(); nameEdit->setReadOnly(true);  this->nameEdit->setStyleSheet("background: white;");
-    QLabel* password = new QLabel("Password:");     this->passEdit = new QLineEdit(); passEdit->setReadOnly(true);  this->passEdit->setStyleSheet("background: white;");
-    QLabel* email = new QLabel("Email:");           this->emailEdit = new QLineEdit();emailEdit->setReadOnly(true); this->emailEdit->setStyleSheet("background:white;");
-    QLabel* cashAmount = new QLabel("Cash Amount:");this->cashEdit = new QLineEdit(); cashEdit->setReadOnly(true);  this->cashEdit->setStyleSheet("background: white;");
+    QLabel* name = new QLabel("Name:");             this->nameEdit = new QLineEdit(); nameEdit->setReadOnly(true);  this->nameEdit->setStyleSheet("QLineEdit{ background-color:white;border: 2px solid #00BFFF;border-radius: 5px;}");
+    QLabel* password = new QLabel("Password:");     this->passEdit = new QLineEdit(); passEdit->setReadOnly(true);  this->passEdit->setStyleSheet("QLineEdit{ background-color:white;border: 2px solid #00BFFF;border-radius: 5px;}");
+    QLabel* email = new QLabel("Email:");           this->emailEdit = new QLineEdit();emailEdit->setReadOnly(true); this->emailEdit->setStyleSheet("QLineEdit{ background-color:white;border: 2px solid #00BFFF;border-radius: 5px;}");
+    QLabel* cashAmount = new QLabel("Cash Amount:");this->cashEdit = new QLineEdit(); cashEdit->setReadOnly(true);  this->cashEdit->setStyleSheet("QLineEdit{ background-color:white;border: 2px solid #00BFFF;border-radius: 5px;}");
     name->setStyleSheet("background: white; color:#00BFFF;");
     password->setStyleSheet("background: white; color:#00BFFF;");
     email->setStyleSheet("background: white; color:#00BFFF;");
@@ -227,7 +227,7 @@ void StudentWidget::initSearchWidget()
 void StudentWidget::initHistoryWidget()
 {
     this->HistoryWidget = new QWidget();
-    this->HistoryWidget->setStyleSheet("background: #white;color: #2E2E2E; font-size: 15px; font-weight: 400;");
+    this->HistoryWidget->setStyleSheet("background: white;color: #2E2E2E; font-size: 15px; font-weight: 400;");
     this->HistoryList = new QTreeWidget();
     this->HistoryList->setStyleSheet("background: white");
     this->OkBtnh = new QPushButton("Ok");
