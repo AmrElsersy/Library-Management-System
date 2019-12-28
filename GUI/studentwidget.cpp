@@ -28,8 +28,8 @@ StudentWidget::StudentWidget(QWidget *parent) : QWidget(parent)
     this->today = new QLabel();
     this->todayIs = new QLabel("Today is : ");
     this->today->setText(QString::fromStdString(to_string(todayDate)));
-    this->today->setStyleSheet("background-color:#87CEFA;color:white;font-weight: bold;font-size: 18px;");
-    this->todayIs->setStyleSheet("background-color:#24C5FF;color:white;font-weight: bold;font-size: 15px;");
+    this->today->setStyleSheet("color:white;font-weight: bold;font-size: 18px;");
+    this->todayIs->setStyleSheet("color:white;font-weight: bold;font-size: 15px;");
 
     this->errorBox = new QMessageBox();
     this->successBox = new QMessageBox();
@@ -281,11 +281,11 @@ void StudentWidget::Design()
 
     // grid Design
     this->grid->addWidget(this->toolBar,0,0,-1,1);
-    this->grid->addWidget(this->searchLineEdit,0,1,1,2,Qt::AlignTop);
-    this->grid->addWidget(this->viewBooksScroll,1,1);
-    this->grid->addWidget(this->increaseTime,2,1);
-    this->grid->addWidget(this->todayIs,3,1,Qt::AlignLeft);
-    this->grid->addWidget(this->today,3,1,Qt::AlignCenter);
+//    this->grid->addWidget(this->searchLineEdit,0,1,1,2,Qt::AlignTop);
+    this->grid->addWidget(this->viewBooksScroll,0,1);
+    this->grid->addWidget(this->increaseTime,1,1);
+    this->grid->addWidget(this->todayIs,2,1,Qt::AlignLeft);
+    this->grid->addWidget(this->today,2,1,Qt::AlignCenter);
 
     this->setMinimumSize(MIN_SIZE);
     this->setLayout(this->grid);

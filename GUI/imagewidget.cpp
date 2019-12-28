@@ -9,7 +9,7 @@ imageWidget::imageWidget(string name , string imagePath) : QWidget()
     if(imagePath != "")
         this->pixMap =new QPixmap(QCoreApplication::applicationDirPath() + QString::fromStdString(imagePath));
     else
-        this->pixMap = new QPixmap(QCoreApplication::applicationDirPath() + "/../../Library-Management-System/icons/profile.png");
+        this->pixMap = new QPixmap(QCoreApplication::applicationDirPath() + "/../../Library-Management-System/icons/book1.png");
     this->label->setPixmap(pixMap->scaled(this->width(),this->height(),Qt::KeepAspectRatio) );
     this->label->setScaledContents(true);
 
