@@ -20,9 +20,9 @@ LogInWidget::LogInWidget(QWidget* parent): QWidget(parent)
     this->BackBtn->setCursor(Qt::PointingHandCursor);
 
     this->Name = new QLineEdit;
-    this->Name->setStyleSheet("background: white;padding-right:50px;" );
+    this->Name->setStyleSheet("QLineEdit{ background-color:white;border: 2px solid #00BFFF;border-radius: 5px;}");
     this->Password = new QLineEdit;
-    this->Password->setStyleSheet("background: white;padding-right:50px;");
+    this->Password->setStyleSheet("QLineEdit{ background-color:white;border: 2px solid #00BFFF;border-radius: 5px;}");
 
     this->nameLabel = new QLabel("Name");   this->nameLabel->setStyleSheet("color:#00BFFF;");
     this->passLabel = new QLabel("Password"); this->passLabel->setStyleSheet("color:#00BFFF;");

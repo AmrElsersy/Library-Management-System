@@ -28,10 +28,12 @@ StudentWidget::StudentWidget(QWidget *parent) : QWidget(parent)
     this->today = new QLabel();
     this->todayIs = new QLabel("Today is : ");
     this->today->setText(QString::fromStdString(to_string(todayDate)));
-    this->today->setStyleSheet("background-color:#87CEFA;color:white;font-weight: bold;font-size: 15px;");
+    this->today->setStyleSheet("background-color:#87CEFA;color:white;font-weight: bold;font-size: 18px;");
     this->todayIs->setStyleSheet("background-color:#24C5FF;color:white;font-weight: bold;font-size: 15px;");
 
     this->errorBox = new QMessageBox();
+    this->successBox = new QMessageBox();
+    this->successBox->setWindowIcon(QIcon(QCoreApplication::applicationDirPath()+"/../../Library-Management-System/icons/sucess.png"));
     this->tabWidget = new QTabWidget();
 
     this->initProfileWidget();
@@ -406,7 +408,8 @@ void StudentWidget::okButtonClicked()
     this->ProfileWidget->hide();
     emit setLoggedInUserName(this->currentStudent.getName());
 
-
+    this->successBox->setText("Edit Successfully !");
+    this->successBox->show();
 }
 
 void StudentWidget::backButtonClicked()

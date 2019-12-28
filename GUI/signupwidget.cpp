@@ -18,16 +18,16 @@ SignUp::SignUp(QWidget* parent): QWidget(parent)
     this->BackBtn->setStyleSheet("background: #00BFFF; border-radius: 10px; padding: 10px 0px; color: white; ");
     this->BackBtn->setCursor(Qt::PointingHandCursor);
     this->Name = new QLineEdit;
-    this->Name->setStyleSheet("background: white;");
+    this->Name->setStyleSheet("QLineEdit{ background-color:white;border: 2px solid #00BFFF;border-radius: 5px;}");
 
     this->Email = new QLineEdit;
-    this->Email->setStyleSheet("background: white;");
+    this->Email->setStyleSheet("QLineEdit{ background-color:white;border: 2px solid #00BFFF;border-radius: 5px;}");
 
     this->Password = new QLineEdit;
-    this->Password->setStyleSheet("background: white;");
+    this->Password->setStyleSheet("QLineEdit{ background-color:white;border: 2px solid #00BFFF;border-radius: 5px;}");
 
     this->ConfirmPassword = new QLineEdit;
-    this->ConfirmPassword->setStyleSheet("background: white;");
+    this->ConfirmPassword->setStyleSheet("QLineEdit{ background-color:white;border: 2px solid #00BFFF;border-radius: 5px;}");
 
     this->nameLabel = new QLabel("Name");
     this->emailLabel= new QLabel("Email");

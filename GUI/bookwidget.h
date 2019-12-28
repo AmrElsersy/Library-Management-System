@@ -47,7 +47,7 @@ private:
     QLabel* bookImage;
 //    QPushButton* backBtn;
     QPushButton*borrowBtn;
-    QMessageBox* borrowed,*errorBox;
+    QMessageBox* borrowed,*errorBox,*successBox;
     QString Path;
     string bookNameStr;
     int expectedReturnDate;
@@ -60,9 +60,12 @@ private:
     string userName ;
     Book currentBook;
 
+    QLabel* enterBook ;
+
 public:
     BookWidget(QWidget *parent = nullptr);
     BookWidget(Book b);
+    void Design();
     void Signals_Slots();
 
 signals:

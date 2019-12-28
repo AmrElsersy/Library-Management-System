@@ -81,6 +81,7 @@ private:
     QPushButton* increaseTime;
     QLabel* today,*todayIs;
     QMessageBox* errorBox;
+    QMessageBox* successBox;
 
     QTabWidget *tabWidget;
 

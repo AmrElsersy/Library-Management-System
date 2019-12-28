@@ -8,52 +8,61 @@ BookWidget::BookWidget(Book b)
 
 BookWidget::BookWidget(QWidget *parent) : QWidget(parent)
 {
-    this->setStyleSheet("background: #F6F5E4;color: #2E2E2E; font-size: 15px; font-weight: 400;");
+    this->setStyleSheet("background: white;color: #00BFFF; font-size: 18px; font-weight: 400;");
     this->Path = QCoreApplication::applicationDirPath();
     this->grid = new QGridLayout();
-    this->bookName = new QLabel();
-    this->bookType = new QLabel();
-    this->bookPrice = new QLabel();
-    this->bookPublisher = new QLabel();
-    this->bookAvailability = new QLabel();
-    this->name = new QLabel("Name :");
-    this->type = new QLabel("Type :");
-    this->price = new QLabel("Price :");
-    this->publisher = new QLabel("Publisher :");
-    this->availability = new QLabel("Status :");
+
+    this->bookName = new QLabel(); bookName->setStyleSheet("color:#00BFFF;font-weight: bold;font-size: 15px;");
+    this->bookType = new QLabel(); bookType->setStyleSheet("color:#00BFFF;font-weight: bold;font-size: 15px;");
+    this->bookPrice = new QLabel(); bookPrice->setStyleSheet("color:#00BFFF;font-weight: bold;font-size: 15px;");
+    this->bookPublisher = new QLabel(); bookPublisher->setStyleSheet("color:#00BFFF;font-weight: bold;font-size: 15px;");
+    this->bookAvailability = new QLabel(); bookAvailability->setStyleSheet("color:#00BFFF;font-weight: bold;font-size: 15px;");
+
+    this->name = new QLabel("Name :"); name->setStyleSheet("color:black;font-weight: bold;font-size: 16px;");
+    this->type = new QLabel("Type :"); type->setStyleSheet("color:black;font-weight: bold;font-size: 16px;");
+    this->price = new QLabel("Price :"); price->setStyleSheet("color:black;font-weight: bold;font-size: 16px;");
+    this->publisher = new QLabel("Publisher :"); publisher->setStyleSheet("color:black;font-weight: bold;font-size: 16px;");
+    this->availability = new QLabel("Status :"); availability->setStyleSheet("color:black;font-weight: bold;font-size: 16px;");
     this->bookImage = new QLabel();
-//    this->backBtn = new QPushButton("Ok");
     this->borrowBtn = new QPushButton("Borrow book");
-    this->borrowBtn->setStyleSheet("background: #2e2e2e; border-radius: 10px; padding: 10px 0px; color: white; width: 150px;");
+    this->borrowBtn->setStyleSheet("background: #00BFFF; border-radius: 10px; padding: 10px 0px; color: white; width: 200px;");
     this->borrowBtn->setCursor(Qt::PointingHandCursor);
     this->borrowed = new QMessageBox();
     this->errorBox = new QMessageBox();
     this->errorBox->setWindowIcon(QIcon(QCoreApplication::applicationDirPath()+"/../../Library-Management-System/icons/error.png"));
+    this->successBox = new QMessageBox();
+    this->successBox->setWindowIcon(QIcon(QCoreApplication::applicationDirPath()+"/../../Library-Management-System/icons/sucess.png"));
 
-    this->grid->addWidget(this->name,0,0,1,1);
-    this->grid->addWidget(this->type,1,0,1,1);
-    this->grid->addWidget(this->price,2,0,1,1);
-    this->grid->addWidget(this->publisher,3,0,1,1);
-    this->grid->addWidget(this->availability,4,0,1,1);
-    this->grid->addWidget(this->bookName,0,1,1,2);
-    this->grid->addWidget(this->bookType,1,1,1,2);
-    this->grid->addWidget(this->bookPrice,2,1,1,2);
-    this->grid->addWidget(this->bookPublisher,3,1,1,2);
-    this->grid->addWidget(this->bookAvailability,4,1,1,2);
-//    this->grid->addWidget(this->backBtn,5,0,1,2);
-    this->grid->addWidget(this->borrowBtn,5,2,1,2);
-    this->grid->addWidget(this->bookImage,0,4,6,3);
-
-    this->setLayout(this->grid);
 
     this->ReturnWidget = new QWidget();
-    this->ReturnWidget->setStyleSheet("background: #F6F5E4;color: #2E2E2E; font-size: 15px; font-weight: 400;");
+    this->ReturnWidget->setStyleSheet("background: white;color: #00BFFF; font-size: 18px; font-weight: 400;");
     this->ReturnLayout = new QGridLayout();
-    QLabel* enterBook = new QLabel("Enter expected return date :");
+    this->enterBook = new QLabel("Enter expected return date :"); enterBook->setStyleSheet("color:#00BFFF;");
     this->ReturnDate = new QLineEdit();
     this->OkkBtn = new QPushButton("Ok");
-    this->OkkBtn->setStyleSheet("background: #2e2e2e; border-radius: 10px; padding: 10px 0px; color: white; ");
+    this->OkkBtn->setStyleSheet("background: #00BFFF; border-radius: 10px; padding: 10px 0px; color: white; ");
     this->OkkBtn->setCursor(Qt::PointingHandCursor);
+
+    this->Design();
+    this->Signals_Slots();
+
+}
+void BookWidget::Design()
+{
+
+    this->grid->addWidget(this->name,0,0);
+    this->grid->addWidget(this->type,1,0);
+    this->grid->addWidget(this->price,2,0);
+    this->grid->addWidget(this->publisher,3,0);
+    this->grid->addWidget(this->availability,4,0);
+    this->grid->addWidget(this->bookName,0,1,1,-1);
+    this->grid->addWidget(this->bookType,1,1,1,-1);
+    this->grid->addWidget(this->bookPrice,2,1,1,-1);
+    this->grid->addWidget(this->bookPublisher,3,1,1,-1);
+    this->grid->addWidget(this->bookAvailability,4,1,1,-1);
+    this->grid->addWidget(this->borrowBtn,5,0,1,-1);
+    this->grid->addWidget(this->bookImage,0,2,5,-1);
+
     this->ReturnLayout->addWidget(enterBook,0,0,Qt::AlignLeft);
     this->ReturnLayout->addWidget(ReturnDate,0,1);
     QHBoxLayout* verticlaLayout = new QHBoxLayout;
@@ -61,11 +70,11 @@ BookWidget::BookWidget(QWidget *parent) : QWidget(parent)
     this->ReturnLayout->addLayout(verticlaLayout,2,0,1,-1);
     this-> ReturnWidget->setLayout(ReturnLayout);
 
-    this->Signals_Slots();
-
-    //emit getBookInfo(currentBook);
-//    this->bookInfo(currentBook);
+    this->setMinimumWidth(400);
+    this->setMinimumHeight(300);
+    this->setLayout(this->grid);
 }
+
 
 void BookWidget::Signals_Slots()
 {
@@ -135,6 +144,9 @@ void BookWidget::okkkButtonClicked()
     this->expectedReturnDate = this->ReturnDate->text().toInt();
     emit borrowBook(this->bookNameStr,this->userName ,this->expectedReturnDate);
     this->ReturnWidget->hide();
+    this->successBox->setText("Borrowed the Book Successfully !");
+    this->successBox->show();
+
 }
 
 void BookWidget::setCurrentBook(Book b)
