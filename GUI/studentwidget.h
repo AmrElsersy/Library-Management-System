@@ -29,6 +29,7 @@
 #include <iostream>
 #include "GUI/imagewidget.h"
 #include <vector>
+#include <QFrame>
 using namespace std;
 
 class StudentWidget : public QWidget
