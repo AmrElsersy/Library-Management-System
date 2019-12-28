@@ -8,7 +8,7 @@ Book::Book(string name, string Type, Publisher* author, string Rowid, int price,
     publisher = author ;
     Price = price ;
     state = State;
-    availability = Availability;
+    availability = 1;
     rowid=Rowid;
 }
 

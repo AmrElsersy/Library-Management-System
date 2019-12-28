@@ -153,7 +153,7 @@ void PublisherWidget::bookDataCheck()
         return;
     }
 
-    string Name ;
+    string Name;
     string Type;
     int Price;
     Name  =this->bookName->text().toStdString();

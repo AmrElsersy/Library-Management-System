@@ -19,7 +19,6 @@ void DataBase::init(QString path)
 
     if (!this->db.isOpen())
         cout << "db doesn't open and you are not ray2" << endl;
-
 }
 
 bool DataBase::saveBook(Book book)
@@ -28,8 +27,8 @@ bool DataBase::saveBook(Book book)
     check.prepare("SELECT * FROM Books WHERE Name=?;");
     check.bindValue(0,QString::fromStdString(book.getName()));
     check.exec();
-    if(check.next())
-        return false;
+//    if(check.next())
+//        return false;
     QSqlQuery query(this->db);
     query.prepare("INSERT INTO Books(Name,Type,Price,Publisher,borrowedDate,expectedReturnDate,actualReturnDate,State,Availability,imagePath) VALUES(?,?,?,?,?,?,?,?,?,?);");
     query.bindValue(0,QString::fromStdString(book.getName()));

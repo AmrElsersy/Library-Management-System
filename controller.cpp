@@ -173,15 +173,15 @@ void Controller::Upload_book(string pubName ,string name ,string type,int price)
     book1.setPublisherName(pubName);
     book1.setState(1);
     book1.setAvailability(1);
-    if(!db.saveBook(book1))
-    {
-        cout << "book already exist! " << endl;
-        return;
-    }
+    db.saveBook(book1);
+//    if(!db.saveBook(book1))
+//    {
+//        cout << "book already exist! " << endl;
+//        return;
+//    }
     db.addPublisherBooks(book1,pubName);
     db.addPublisherCash(price*10,pubName);
     cout<<"Book saved succesfully and cash added to your account <3"<<endl;
-
 }
 void Controller::searchBookByName(string BookNameOrID,string stuName)
 {
