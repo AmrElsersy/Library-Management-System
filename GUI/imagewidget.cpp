@@ -17,7 +17,6 @@ imageWidget::imageWidget(string name , string imagePath) : QWidget()
     this->layout->addWidget(label);
     this->layout->addWidget(Name,0,Qt::AlignCenter);
     this->setLayout(this->layout);
-//    this->setStyleSheet("background-color:white;");
 }
 
 void imageWidget::mousePressEvent(QMouseEvent *event)

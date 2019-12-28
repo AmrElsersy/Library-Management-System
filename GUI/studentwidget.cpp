@@ -410,6 +410,12 @@ void StudentWidget::backButtonClicked()
 
 void StudentWidget::okkButtonClicked()
 {
+    if(this->ReturnBook->text().isEmpty() )
+    {
+        this->errorBox->setText("Please Enter a Valid Date");
+        this->errorBox->show();
+        return;
+    }
     string returnBookName = this->ReturnBook->text().toStdString();
     emit returnBook(returnBookName,currentStudent.getName());
 }
