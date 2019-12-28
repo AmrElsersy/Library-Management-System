@@ -20,16 +20,14 @@ StudentWidget::StudentWidget(QWidget *parent) : QWidget(parent)
 
     //today   to be designed
     this->increaseTime = new QPushButton("Add day");
-    this->increaseTime->setStyleSheet("background: white; border-radius: 10px; padding: 10px 0px; color: #00BFFF;"
+    this->increaseTime->setStyleSheet("background: #008080; border-radius: 10px; padding: 10px 0px; color: white;"
                                       "font-weight: bold;"
                                       "font-size: 15px;");
     this->increaseTime->setCursor(Qt::PointingHandCursor);
 
     this->today = new QLabel();
-    this->todayIs = new QLabel("Today is : ");
-    this->today->setText(QString::fromStdString(to_string(todayDate)));
-    this->today->setStyleSheet("color:white;font-weight: bold;font-size: 18px;");
-    this->todayIs->setStyleSheet("color:white;font-weight: bold;font-size: 15px;");
+    this->today->setText(" Today: "+QString::fromStdString(to_string(todayDate)));
+    this->today->setStyleSheet("color:#00BFFF;font-weight: bold;font-size: 18px; background-color:white;");
 
     this->errorBox = new QMessageBox();
     this->successBox = new QMessageBox();
@@ -46,7 +44,6 @@ StudentWidget::StudentWidget(QWidget *parent) : QWidget(parent)
     this->Design();
     this->Signals_Slots();
 }
-
 void StudentWidget::initToolBar()
 {
     this->toolBar->setMovable(false);
@@ -71,7 +68,7 @@ void StudentWidget::initToolBar()
     this->toolBar->setStyleSheet("QToolButton:hover{padding: 5px;background-color: white; color: black;}"
                                  "QToolButton:select{padding: 5px;background-color: white; color: black;}"
                                  "QToolButton{padding: 10px; border-radius: 10px;}"
-                                 "QToolBar{background-color:#00BFFF;}");
+                                 "QToolBar{background-color:white;}");
 }
 void StudentWidget::initProfileWidget()
 {
@@ -83,10 +80,10 @@ void StudentWidget::initProfileWidget()
     QLabel* password = new QLabel("Password:");     this->passEdit = new QLineEdit(); passEdit->setReadOnly(true);  this->passEdit->setStyleSheet("QLineEdit{ background-color:white;border: 2px solid #00BFFF;border-radius: 5px;}");
     QLabel* email = new QLabel("Email:");           this->emailEdit = new QLineEdit();emailEdit->setReadOnly(true); this->emailEdit->setStyleSheet("QLineEdit{ background-color:white;border: 2px solid #00BFFF;border-radius: 5px;}");
     QLabel* cashAmount = new QLabel("Cash Amount:");this->cashEdit = new QLineEdit(); cashEdit->setReadOnly(true);  this->cashEdit->setStyleSheet("QLineEdit{ background-color:white;border: 2px solid #00BFFF;border-radius: 5px;}");
-    name->setStyleSheet("background: white; color:#00BFFF;");
-    password->setStyleSheet("background: white; color:#00BFFF;");
-    email->setStyleSheet("background: white; color:#00BFFF;");
-    cashAmount->setStyleSheet("background: white; color:#00BFFF;");
+//    name->setStyleSheet("background: white; color:#00BFFF;");
+//    password->setStyleSheet("background: white; color:#00BFFF;");
+//    email->setStyleSheet("background: white; color:#00BFFF;");
+//    cashAmount->setStyleSheet("background: white; color:#00BFFF;");
 
     QLabel *image; QPixmap* pixMap;
     image = new QLabel;
@@ -271,7 +268,6 @@ void StudentWidget::initLibrarianWidget()
 
 void StudentWidget::Design()
 {
-    // make the Books Widget Scrollable
     this->viewBooksScroll->setWidget(this->viewBooksWidget);
     this->viewBooksScroll->setWidgetResizable(true);
     this->viewBooksScroll->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
@@ -279,17 +275,14 @@ void StudentWidget::Design()
     this->viewBooksWidget->setStyleSheet("background-color:white");
     this->viewBooksWidget->setLayout(this->viewBooksLayout);
 
-    // grid Design
-    this->grid->addWidget(this->toolBar,0,0,-1,1);
-//    this->grid->addWidget(this->searchLineEdit,0,1,1,2,Qt::AlignTop);
-    this->grid->addWidget(this->viewBooksScroll,0,1);
-    this->grid->addWidget(this->increaseTime,1,1);
-    this->grid->addWidget(this->todayIs,2,1,Qt::AlignLeft);
-    this->grid->addWidget(this->today,2,1,Qt::AlignCenter);
+    this->grid->addWidget(this->toolBar,0,1,-1,1);
+    this->grid->addWidget(this->viewBooksScroll,0,0);
+    this->grid->addWidget(this->increaseTime,1,0);
+    this->grid->addWidget(this->today,1,1,Qt::AlignLeft);
 
     this->setMinimumSize(MIN_SIZE);
     this->setLayout(this->grid);
-    this->setStyleSheet("background-color:#00BFFF;");
+    this->setStyleSheet("background-color:white;");
 }
 
 void StudentWidget::Signals_Slots()
@@ -307,8 +300,6 @@ void StudentWidget::Signals_Slots()
     connect(this->PriceBtn,SIGNAL(clicked()),this,SLOT(priceButtonClicked()));
     connect(this->PubBtn,SIGNAL(clicked()),this,SLOT(pubButtonClicked()));
     connect(this->DoneBtn,SIGNAL(clicked()),this,SLOT(doneButtonClicked()));
-//    connect(this->Ok2Btn,SIGNAL(clicked()),this,SLOT(Ok2ButtonClicked()));
-
 }
 
 void StudentWidget::UpdateBooks()
@@ -426,7 +417,7 @@ void StudentWidget::okkButtonClicked()
 void StudentWidget::increaseIsClicked()
 {
     todayDate++;
-    this->today->setText(QString::fromStdString(to_string(todayDate)));
+    this->today->setText(" Today: "+QString::fromStdString(to_string(todayDate)));
 }
 
 void StudentWidget::error_return(string text)
