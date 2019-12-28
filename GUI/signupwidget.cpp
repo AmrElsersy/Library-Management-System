@@ -116,6 +116,7 @@ void SignUp::signUpCheck()
     pass=this->Password->text().toStdString();
     if(this->studentBtn->isChecked())type=1;
     if(this->publisherBtn->isChecked())type=2;
+
     emit signUpData(name,email,pass,type);
 }
 

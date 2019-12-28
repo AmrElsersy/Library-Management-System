@@ -43,6 +43,7 @@ bool DataBase::saveBook(Book book)
     query.bindValue(8,book.getAvailability());
     query.bindValue(9,QString::fromStdString(book.getImagePath()));
     query.exec();
+    return true;
 }
 
 bool DataBase::saveStudent(Student student)
