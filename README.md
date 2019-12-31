@@ -18,7 +18,7 @@ Project is created with:
 ## Prerequisites
 *	Windows 7 (32-bit or 64-bit) or higher ,Linux Ubuntu 16.04 LTS or higher.
 *	256 MB of RAM
-*	500 MHz CPU, 1 GHz preferred for 60-FPS velvet-smooth UI
+*	500 MHz CPU
 *	OpenGL ES 2.0 support 
 *	Qt C++ Framework Installed
 *	MinGW Compiler
