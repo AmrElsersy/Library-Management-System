@@ -34,7 +34,7 @@ Project is created with:
 *	Open the QTDIR/bin path and run qtenv2.bat to initialize the windeployqt environment.
 * Run the Project in Release Mode to get the executable from PROJECT_DIR/build/release/PROJECT.exe
 * Run $ windeployqt path_to_project/PROJECT.exe
-* Copy the icon file included in the project in the "/../../path_to_project" path
+* Copy the icon folder included in the project in the "/../../path_to_project" path
 * Run the executable deployed application
 ```
 $ cd QTDIR/bin
